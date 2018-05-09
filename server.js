@@ -19,6 +19,7 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());         
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use('/api/imagesearch', imgSearchRouter);
+app.set('json spaces', 2);
 
 
 // http://expressjs.com/en/starter/basic-routing.html
