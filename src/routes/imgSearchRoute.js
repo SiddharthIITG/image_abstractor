@@ -12,14 +12,12 @@ imgSearchRouter.get(/\w/, function(req, res) {
   const searchTerm = req._parsedUrl.pathname.slice(1); 
 
   console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&offset=${offset}&cx=${cx}`);
-  request(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&offset=${offset}&cx=${cx}`, function (error, response, body) {
+  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&offset=${offset}&cx=${cx}`, function (error, response, body) {
     if (error) {
       debug(error);
     }
     if (!error && response.statusCode == 200) {
-      console.log(body) // Print the google web page.
-      console.log(response);
-      res.json(body);
+      res.end(JSON.stringify(body), null, 4);
     }
   })
   var cache = [];
