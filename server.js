@@ -23,7 +23,7 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-app.get('/api/imagesearch/', function (req, res) {
+app.get('/api/imagesearch/\w', function (req, res) {
   const query = req.query;
   res.send(query);
 });
