@@ -17,7 +17,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
       debug(error);
     }
     if (!error && response.statusCode == 200) {
-      res.end(JSON.stringify(body), null, 4);
+      res.render('index', {jsonObj: body});
     }
   })
   var cache = [];
@@ -36,3 +36,4 @@ imgSearchRouter.get(/\w/, function(req, res) {
   })
 
 module.exports = imgSearchRouter;
+

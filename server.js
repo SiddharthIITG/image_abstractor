@@ -29,7 +29,7 @@ app.use('/api/imagesearch', imgSearchRouter);
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  res.render('index');
+  res.render('index', {jsonObj: {}});
 });
 
 // listen for requests :)
