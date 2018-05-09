@@ -7,5 +7,4 @@ imgSearchRouter.get(function(req, res) {
   })
 
 
-
-module.exports = router;
+module.exports = imgSearchRouter;

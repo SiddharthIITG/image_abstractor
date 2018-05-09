@@ -5,6 +5,7 @@
 var express = require('express');
 var app = express();
 const debug = require('debug');
+const morgan = require('morgan');
 const imgSearchRouter = require('./src/routes/imgSearchRoute');
 
 // we've started you off with Express, 
@@ -12,6 +13,9 @@ const imgSearchRouter = require('./src/routes/imgSearchRoute');
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+
+app.use(morgan('tiny'));
+app.use('/api/imagesearch', imgSearchRouter);
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
@@ -23,7 +27,7 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-app.use('/api/imagesearch', imgSearchRouter);
+
 
 // app.get('/api/imagesearch', function (req, res) {
 //   const query = req.query;
