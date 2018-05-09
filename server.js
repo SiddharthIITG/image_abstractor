@@ -7,6 +7,7 @@ var app = express();
 const debug = require('debug');
 const morgan = require('morgan');
 const imgSearchRouter = require('./src/routes/imgSearchRoute');
+const bodyParser = require('body-parser');
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -15,7 +16,10 @@ const imgSearchRouter = require('./src/routes/imgSearchRoute');
 app.use(express.static('public'));
 
 app.use(morgan('tiny'));
+app.use(bodyParser.json());         
+app.use(bodyParser.urlencoded({ extended: true })); 
 app.use('/api/imagesearch', imgSearchRouter);
+
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
