@@ -18,7 +18,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
         cache.push(value);
       }
     return value;
-    }));
+    }, 2));
   cache = null;
   })
 

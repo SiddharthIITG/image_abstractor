@@ -12,6 +12,10 @@ const bodyParser = require('body-parser');
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+app.set('json spaces', 2);
+
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
@@ -19,7 +23,8 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());         
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use('/api/imagesearch', imgSearchRouter);
-app.set('json spaces', 2);
+
+
 
 
 // http://expressjs.com/en/starter/basic-routing.html
