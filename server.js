@@ -15,7 +15,7 @@ const ejs = require('ejs');
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
-app.set('json spaces', 2);
+// app.set('json spaces', 2);
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
