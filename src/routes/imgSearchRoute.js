@@ -610,18 +610,24 @@ imgSearchRouter.get(/\w/, function(req, res) {
   const searchTerm = req._parsedUrl.pathname.slice(1); 
 
   console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&offset=${offset}&cx=${cx}`);
-  // request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&offset=${offset}&cx=${cx}`, function (error, response, body) {
-  //   if (error) {
-  //     debug(error);
-  //   }
-  //   if (!error && response.statusCode == 200) {
-  //     res.render('index', {jsonObj: body});
-  //   }
-  // })
-  obj.items.forEach(item => {
-    var object = {};
-    object.title = item.title
-  });
+  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&offset=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
+    if (error) {
+      debug(error);
+    }
+    if (!error && response.statusCode == 200) {
+        var jsonObjDisplay = {};
+        obj.items.forEach(item => {
+        var object = {};
+        object.title = item.title;
+        object.url = item.cse_image.src;
+        object.thumbnail = item.cse_thumbnail.src;
+        object.context = item.link;
+        jsonObjDisplay.push(object);
+      });
+      res.render('index', {jsonObj: jsonObjDisplay});
+    }
+  })
+
   res.render('index', {jsonObj: JSON.stringify(obj, null, 2)});
   var cache = [];
   // res.end(JSON.stringify(req, function(key, value) {
