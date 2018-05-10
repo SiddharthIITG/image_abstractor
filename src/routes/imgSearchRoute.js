@@ -644,23 +644,8 @@ imgSearchRouter.get(/\w/, function(req, res) {
         try {
           client = await MongoClient.connect(url_db);
           console.log('Connected correctly to server again');
-
           const db = client.db(dbName);
           
-          const a = async function countDocs(){
-            try {
-              var dbCount = await db.collection('urls').count();
-
-            } catch (err1) {
-              debug(err1.stack);
-          }
-            //creating json object. 
-          var jsonObj = {_id: (dbCount + 1).toString() ,url: query.dream, short_url: `<a href = ${(dbCount + 1).toString()}>` + 'https://abrasive-reaction.glitch.me/' + (dbCount + 1).toString() + '</a>'};
-          jsonObj.cleanUrl = jsonObj.short_url.match(regexp)[1];
-          const response = await db.collection('urls').insertOne(jsonObj);
-          var jsonRender = {url: jsonObj.url, short_url: jsonObj.short_url};
-          }
-          await a();
           db.close();
         } catch (err) {
           debug(err.stack);
