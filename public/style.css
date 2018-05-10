@@ -70,9 +70,30 @@ footer {
   border-top: 1px solid lightgrey;
 }
 
-pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
-.string { color: green; }
-.number { color: darkorange; }
-.boolean { color: blue; }
-.null { color: magenta; }
-.key { color: red; }
+pre {
+  outline: 1px solid #ccc; 
+  padding: 5px; margin: 5px;
+  font-size: 15px;
+  overflow: hidden;
+/*   o-text-overflow: ellipsis; */
+  text-overflow: ellipsis;
+}
+
+a:link {
+    color: green;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: green;
+}
+
+/* selected link */
+a:active {
+    color: green;
+}

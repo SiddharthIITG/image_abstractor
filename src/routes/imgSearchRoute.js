@@ -621,11 +621,11 @@ imgSearchRouter.get(/\w/, function(req, res) {
         object.title = item.title;
         if ("pagemap" in item) {
             if ("cse_image" in item.pagemap)
-              object.url = item.pagemap.cse_image[0].src;
+              object.url = `<a href = ${item.pagemap.cse_image[0].src}>` + item.pagemap.cse_image[0].src + '</a>' ;
             if ("cse_thumbnail" in item.pagemap)  
-              object.thumbnail = item.pagemap.cse_thumbnail[0].src;
+              object.thumbnail = `<a href = ${item.pagemap.cse_thumbnail[0].src}>` + item.pagemap.cse_thumbnail[0].src + '</a>';
         }
-        object.context = item.link;
+        object.context = `<a href = ${item.link}>` +  item.link + ';
         jsonObjDisplay.push(object);
       });
 
