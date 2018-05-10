@@ -625,7 +625,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
             if ("cse_thumbnail" in item.pagemap)  
               object.thumbnail = `<a href = ${item.pagemap.cse_thumbnail[0].src}>` + item.pagemap.cse_thumbnail[0].src + '</a>';
         }
-        object.context = `<a href = ${item.link}>` +  item.link + ';
+        object.context = `<a href = ${item.link}>` +  item.link + '</a>';
         jsonObjDisplay.push(object);
       });
 
