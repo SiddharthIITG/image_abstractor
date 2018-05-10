@@ -615,20 +615,22 @@ imgSearchRouter.get(/\w/, function(req, res) {
       debug(error);
     }
     if (!error && response.statusCode == 200) {
-        var jsonObjDisplay = {};
-        obj.items.forEach(item => {
+        var jsonObjDisplay = [];
+        JSON.parse(body).items.forEach(item => {
         var object = {};
         object.title = item.title;
-        object.url = item.cse_image.src;
-        object.thumbnail = item.cse_thumbnail.src;
+        // object.url = item.cse_image[0].src;
+        // object.thumbnail = item.pagemap.cse_thumbnail.src;
         object.context = item.link;
         jsonObjDisplay.push(object);
       });
-      res.render('index', {jsonObj: jsonObjDisplay});
+      
+      console.log(typeof body);
+      res.render('index', {jsonObj: JSON.stringify(jsonObjDisplay)});
     }
   })
 
-  res.render('index', {jsonObj: JSON.stringify(obj, null, 2)});
+  // res.render('index', {jsonObj: JSON.stringify(obj, null, 2)});
   var cache = [];
   // res.end(JSON.stringify(req, function(key, value) {
   //   if (typeof value === 'object' && value !== null) {
