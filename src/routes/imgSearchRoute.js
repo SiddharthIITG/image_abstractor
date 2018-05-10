@@ -619,14 +619,13 @@ imgSearchRouter.get(/\w/, function(req, res) {
         JSON.parse(body).items.forEach(item => {
         var object = {};
         object.title = item.title;
-        // object.url = item.cse_image[0].src;
+        object.url = item.pagemap.cse_image[0].src;
         // object.thumbnail = item.pagemap.cse_thumbnail.src;
         object.context = item.link;
         jsonObjDisplay.push(object);
       });
-      
-      console.log(typeof body);
-      res.render('index', {jsonObj: JSON.stringify(jsonObjDisplay)});
+
+      res.render('index', {jsonObj: (jsonObjDisplay)});
     }
   })
 
