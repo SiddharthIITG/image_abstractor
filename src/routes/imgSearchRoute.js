@@ -3,6 +3,9 @@ const imgSearchRouter = express.Router();
 const bodyParser = require('body-parser');
 const request = require('request');
 const debug = require('debug');
+const mongodb = require('mongodb');
+//We need to work with "MongoClient" interface in order to connect to a mongodb server.
+const MongoClient = mongodb.MongoClient;
 
 var obj = {
  "kind": "customsearch#search",
@@ -631,23 +634,41 @@ imgSearchRouter.get(/\w/, function(req, res) {
 
       res.render('index', {jsonObj: jsonObjDisplay});
     }
-  })
+    
+    // Connection URL. This is where your mongodb server is running.
+    const url_db = 'mongodb://SIddharthIITG:Siddharth@ds119640.mlab.com:19640/image_abs_search_db';
+    const dbName = 'image_abs_search_db';
+    // Use connect method to connect to the Server
+    (async function mongo() {
+        let client;
+        try {
+          client = await MongoClient.connect(url_db);
+          console.log('Connected correctly to server again');
 
-  // res.render('index', {jsonObj: JSON.stringify(obj, null, 2)});
-  var cache = [];
-  // res.end(JSON.stringify(req, function(key, value) {
-  //   if (typeof value === 'object' && value !== null) {
-  //       if (cache.indexOf(value) !== -1) {
-  //           // Circular reference found, discard key
-  //           return;
-  //       }
-  //       // Store value in our collection
-  //       cache.push(value);
-  //     }
-  //   return value;
-  //   }, 4));
-  cache = null;
+          const db = client.db(dbName);
+          
+          const a = async function countDocs(){
+            try {
+              var dbCount = await db.collection('urls').count();
+
+            } catch (err1) {
+              debug(err1.stack);
+          }
+            //creating json object. 
+          var jsonObj = {_id: (dbCount + 1).toString() ,url: query.dream, short_url: `<a href = ${(dbCount + 1).toString()}>` + 'https://abrasive-reaction.glitch.me/' + (dbCount + 1).toString() + '</a>'};
+          jsonObj.cleanUrl = jsonObj.short_url.match(regexp)[1];
+          const response = await db.collection('urls').insertOne(jsonObj);
+          var jsonRender = {url: jsonObj.url, short_url: jsonObj.short_url};
+          }
+          await a();
+          db.close();
+        } catch (err) {
+          debug(err.stack);
+        }
+        client.close();
+      }());
   })
+})
 
 module.exports = imgSearchRouter;
 
