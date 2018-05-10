@@ -610,7 +610,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
   const searchTerm = req._parsedUrl.pathname.slice(1); 
 
   console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&start=${offset}&cx=${cx}`);
-  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&start=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
+  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&num=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
     if (error) {
       debug(error);
     }
@@ -619,7 +619,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
         JSON.parse(body).items.forEach(item => {
         var object = {};
         object.title = item.title;
-        object.url = item.pagemap.cse_image[0].src;
+        // object.url = item.pagemap.cse_image[0].src;
         object.thumbnail = item.pagemap.cse_thumbnail[0].src ;
         object.context = item.link;
         jsonObjDisplay.push(object);
