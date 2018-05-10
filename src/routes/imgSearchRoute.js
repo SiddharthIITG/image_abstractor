@@ -618,6 +618,10 @@ imgSearchRouter.get(/\w/, function(req, res) {
   //     res.render('index', {jsonObj: body});
   //   }
   // })
+  obj.items.forEach(item => {
+    var object = {};
+    object.title = item.title
+  });
   res.render('index', {jsonObj: JSON.stringify(obj, null, 2)});
   var cache = [];
   // res.end(JSON.stringify(req, function(key, value) {
