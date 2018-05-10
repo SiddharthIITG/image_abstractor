@@ -609,8 +609,8 @@ imgSearchRouter.get(/\w/, function(req, res) {
   const offset = query.offset;
   const searchTerm = req._parsedUrl.pathname.slice(1); 
 
-  console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&offset=${offset}&cx=${cx}`);
-  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&offset=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
+  console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&num=${offset}&cx=${cx}`);
+  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&num=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
     if (error) {
       debug(error);
     }
@@ -620,7 +620,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
         var object = {};
         object.title = item.title;
         object.url = item.pagemap.cse_image[0].src;
-        // object.thumbnail = item.pagemap.cse_thumbnail.src;
+        object.thumbnail = item.pagemap.cse_thumbnail[0].src;
         object.context = item.link;
         jsonObjDisplay.push(object);
       });
