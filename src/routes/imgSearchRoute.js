@@ -636,16 +636,18 @@ imgSearchRouter.get(/\w/, function(req, res) {
     }
     
     // Connection URL. This is where your mongodb server is running.
-    const url_db = 'mongodb://SIddharthIITG:Siddharth@ds119640.mlab.com:19640/image_abs_search_db';
+    const search_db = 'mongodb://SiddharthIITG:Siddharth@ds119640.mlab.com:19640/image_abs_search_db';
     const dbName = 'image_abs_search_db';
     // Use connect method to connect to the Server
     (async function mongo() {
         let client;
         try {
-          client = await MongoClient.connect(url_db);
+          client = await MongoClient.connect(search_db);
           console.log('Connected correctly to server again');
           const db = client.db(dbName);
-          var dbCount = await db.collection('urls').count();
+          var dbCount = await db.collection('searches').count();
+          var jsonObj = {_id: (dbCount + 1).toString(), "search_term": searchTerm, "time": new Date()};
+          const response = await db.collection('searches').insertOne(jsonObj);
           db.close();
         } catch (err) {
           debug(err.stack);
