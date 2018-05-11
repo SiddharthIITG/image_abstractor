@@ -645,7 +645,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
           client = await MongoClient.connect(url_db);
           console.log('Connected correctly to server again');
           const db = client.db(dbName);
-          
+          var dbCount = await db.collection('urls').count();
           db.close();
         } catch (err) {
           debug(err.stack);
