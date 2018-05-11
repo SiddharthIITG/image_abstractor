@@ -610,7 +610,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
   const query = req.query;
   const cx = '012680039554584055873:ni7dars4bne';
   const offset = query.offset;
-  const searchTerm = req._parsedUrl.pathname.slice(1); 
+  var searchTerm = req._parsedUrl.pathname.slice(1); 
 
   console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&start=${offset}&cx=${cx}`);
   request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&start=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
@@ -646,7 +646,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
           console.log('Connected correctly to server again');
           const db = client.db(dbName);
           var dbCount = await db.collection('searches').count();
-          // searchTerm = searchTerm.replace(/%20/g, " ");
+          searchTerm = searchTerm.replace(/%20/g, " ");
           console.log(searchTerm);
           var jsonObj = {_id: (dbCount + 1).toString(), "search_term": searchTerm, "time": (new Date()).toLocaleString()};
           const response = await db.collection('searches').insertOne(jsonObj);
