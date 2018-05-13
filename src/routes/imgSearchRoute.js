@@ -613,7 +613,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
   var searchTerm = req._parsedUrl.pathname.slice(1); 
 
   console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&start=${offset}&cx=${cx}`);
-  request(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBpJxy8i8iI7mt1lkPisKrIyMzl8ciqU0M&q=${searchTerm}&start=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
+  request(`https://www.googleapis.com/customsearch/v1?key=${process.env.KEY}&q=${searchTerm}&start=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
     if (error) {
       debug(error);
     }
@@ -636,7 +636,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
     }
     
     // Connection URL. This is where your mongodb server is running.
-    const search_db = 'mongodb://SIddharthIITG:Siddharth@ds119640.mlab.com:19640/image_abs_search_db';
+    const search_db = `mongodb://${process.env.USER}:${process.env.PASSWORD}@ds119640.mlab.com:19640/image_abs_search_db`;
     const dbName = 'image_abs_search_db';
     // Use connect method to connect to the Server
     (async function mongo() {
