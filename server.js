@@ -7,6 +7,7 @@ var app = express();
 const debug = require('debug');
 const morgan = require('morgan');
 const imgSearchRouter = require('./src/routes/imgSearchRoute');
+const latestSearchRouter = require('./src/routes/latestSearchRoute');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
@@ -25,6 +26,7 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());         
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use('/api/imagesearch', imgSearchRouter);
+app.use('/api/latest/imagesearch', latestSearchRouter);
 
 
 // http://expressjs.com/en/starter/basic-routing.html
@@ -37,9 +39,3 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-
-
-// app.get('/api/imagesearch', function (req, res) {
-//   const query = req.query;
-//   res.send(query);
-// });
