@@ -19,9 +19,9 @@ latestSearchRouter.get('/', function (req, res) {
           console.log('Connected correctly to server again');
           const db = client.db(dbName);
           // var dbCount = await db.collection('searches').count();
-          const response = await db.collection('searches').find();
+          const response = await db.collection('searches').find({_id: "1"});
           console.log(response);
-          res.end(response);
+          res.send(response);
           db.close();
         } catch (err) {
           debug(err.stack)
