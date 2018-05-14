@@ -648,7 +648,7 @@ imgSearchRouter.get(/\w/, function(req, res) {
           var dbCount = await db.collection('searches').count();
           searchTerm = searchTerm.replace(/%20/g, " ");
           console.log(searchTerm);
-          var jsonObj = {_id: (dbCount + 1).toString(), "search_term": searchTerm, "time": (new Date()).toLocaleString()};
+          var jsonObj = {"search_term": searchTerm, "time": (new Date()).toLocaleString()};
           const response = await db.collection('searches').insertOne(jsonObj);
           db.close();
         } catch (err) {
