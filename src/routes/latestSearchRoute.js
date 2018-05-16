@@ -27,7 +27,7 @@ latestSearchRouter.get('/', function (req, res) {
             res.render('index', {jsonObj: jsonObj});
           }
           else {
-            var jsonObj = await db2.collection('searches').find().sort({_id:1}).limit(10).toArray();
+            var jsonObj = await db2.collection('searches').find({}, {'_id': false}).sort({time:-1}).limit(10).toArray();
             res.render('index', {jsonObj: jsonObj});
           }
           db2.close();
