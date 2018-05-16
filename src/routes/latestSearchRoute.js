@@ -18,10 +18,12 @@ latestSearchRouter.get('/', function (req, res) {
           client = await MongoClient.connect(search_db);
           console.log('Connected correctly to server again');
           const db2 = client.db(dbName);
-          // var dbCount = await db.collection('searches').count();
-          var jsonObj = await db2.collection('searches').find({_id: "1"});
+          var dbCount = await db2.collection('searches').count();
+          console.log(dbCount);
+          var jsonObj = await db2.collection('searches').find({});
+          console.log(jsonObj);
           // console.log(response);
-          res.render('index', jsonObj);
+          // res.render('index', jsonObj);
           db2.close();
         } catch (err) {
           debug(err.stack)
