@@ -20,10 +20,9 @@ latestSearchRouter.get('/', function (req, res) {
           const db2 = client.db(dbName);
           var dbCount = await db2.collection('searches').count();
           console.log(dbCount);
-          var jsonObj = await db2.collection('searches').find({});
-          console.log(jsonObj);
+          var jsonObj = await db2.collection('searches').find({}).toArray();
           // console.log(response);
-          // res.render('index', jsonObj);
+          res.render('index', jsonObj);
           db2.close();
         } catch (err) {
           debug(err.stack)
