@@ -19,10 +19,16 @@ latestSearchRouter.get('/', function (req, res) {
           console.log('Connected correctly to server again');
           const db2 = client.db(dbName);
           var dbCount = await db2.collection('searches').count();
-          console.log(dbCount);
-          var jsonObj = await db2.collection('searches').find({}).toArray();
+          // console.log(dbCount);
+          
           // console.log(response);
-          res.render('index', jsonObj);
+          if (dbCount < 10) {
+            var jsonObj = await db2.collection('searches').find({}).toArray();
+            res.render('index', {jsonObj: jsonObj});
+          }
+          else {
+            var jsonObj = await db2.collection('searches').find({}).toArray();
+          }
           db2.close();
         } catch (err) {
           debug(err.stack)
