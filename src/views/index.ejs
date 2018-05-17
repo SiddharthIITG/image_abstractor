@@ -30,12 +30,8 @@
     <main>
       <p class="bold">Oh hi,</p>
       
-      <p>Tell me your hopes and dreams: Enter your search term</p>
+      <p>Tell me your hopes and dreams: Enter your search term in the URL above</p>
       
-      <form>
-        <input name="dream" type="text" maxlength="100" placeholder="Dreams!" aria-labelledby="submit-dream" method = "POST" action = "api/imagesearch/">
-        <button type="submit" id="submit-dream">Submit Dream</button>
-      </form> 
       
      <% for(var i=0; i < jsonObj.length; i++) { %>
       <pre><%-JSON.stringify(jsonObj[i], null, 2)%></pre>

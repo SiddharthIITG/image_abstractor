@@ -10,10 +10,10 @@ const MongoClient = mongodb.MongoClient;
 imgSearchRouter.get(/\w/, function(req, res) { 
   
   const query = req.query;
+  var searchTerm = req._parsedUrl.pathname.slice(1); 
   const cx = '012680039554584055873:ni7dars4bne';
   const offset = query.offset;
-  var searchTerm = req._parsedUrl.pathname.slice(1); 
-
+  
   console.log(`https://www.googleapis.com/customsearch/v1?q=${searchTerm}&start=${offset}&cx=${cx}`);
   request(`https://www.googleapis.com/customsearch/v1?key=${process.env.KEY}&q=${searchTerm}&start=${offset}&cx=${cx}&imgSize=large`, function (error, response, body) {
     if (error) {
